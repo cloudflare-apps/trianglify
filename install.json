@@ -1,0 +1,103 @@
+{
+  "resources": {
+    "head": [
+      {
+        "type": "script",
+        "src": "./vendor/trianglify.js"
+      },
+      {
+        "type": "script",
+        "src": "./source/app.js"
+      }
+    ]
+  },
+  "preview": {
+    "handlers": [
+      {
+        "options": ["*"],
+        "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "regions": {
+        "title": "Areas to Trianglify",
+        "order": 1,
+        "type": "array",
+        "items": {
+          "title": "Area",
+          "type": "object",
+          "properties": {
+            "location": {
+              "title": "Location",
+              "description": "What element on the page should be trianglified?",
+              "type": "string",
+              "format": "selector",
+              "order": 1
+            },
+            "colors": {
+              "title": "Color Set",
+              "type": "string",
+              "order": 2,
+              "default": "YlGn",
+              "enum": ["YlGn", "YlGnBu", "GnBu", "BuGn", "PuBuGn", "PuBu", "BuPu", "RdPu", "PuRd", "OrRd", "YlOrRd", "YlOrBr", "Purples", "Blues", "Greens", "Oranges", "Reds", "Greys", "PuOr", "BrBG", "PRGn", "PiYG", "RdBu", "RdGy", "RdYlBu", "Spectral", "RdYlGn", "Accent", "Dark2", "Paired", "Pastel1", "Pastel2", "Set1", "random"],
+              "enumNames": {
+                "YlGn": "Yellow-Green",
+                "YlGnBu": "Yellow-Green-Blue",
+                "GnBu": "Green-Blue",
+                "BuGn": "Blue-Green",
+                "PuBuGn": "Purple-Blue-Green",
+                "PuBu": "Purple-Blue",
+                "BuPu": "Blue-Purple",
+                "RdPu": "Red-Purple",
+                "PuRd": "Purple-Red",
+                "OrRd": "Orange-Red",
+                "YlOrRd": "Yellow-Orange-Red",
+                "YlOrBr": "Yellow-Orange-Brown",
+                "Purples": "Purples",
+                "Blues": "Blues",
+                "Greens": "Greens",
+                "Oranges": "Oranges",
+                "Reds": "Reds",
+                "Greys": "Greys",
+                "PuOr": "Purple-Orange",
+                "BrBG": "Brown-Green",
+                "PRGn": "Purple-Green",
+                "PiYG": "Pink-Green",
+                "RdBu": "Red-Blue",
+                "RdGy": "Red-Grey",
+                "RdYlBu": "Red-Yellow-Blue",
+                "Spectral": "Spectral",
+                "RdYlGn": "Red-Yellow-Green",
+                "Accent": "Accent",
+                "Dark2": "Dark",
+                "Paired": "Paired",
+                "Pastel1": "Pastel 1",
+                "Pastel2": "Pastel 2",
+                "Set1": "Bold",
+                "random": "Random"
+              }
+            },
+            "size": {
+              "title": "Cell Size",
+              "description": "Smaller numbers create more dense patterns",
+              "type": "number",
+              "default": 35,
+              "order": 3
+            },
+            "variance": {
+              "title": "Variance",
+              "description": "Smaller numbers create more geometric patterns",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 75,
+              "order": 4
+            }
+          }
+        }
+      }
+    }
+  }
+}
