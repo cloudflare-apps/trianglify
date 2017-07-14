@@ -8,9 +8,9 @@
   var prevRegions = []
 
   var styleCont = ''
-  for (var i = 0; i < pendingRegions.length; i++) {
-    styleCont += pendingRegions[i].location + ' { opacity: 0; }\n'
-  }
+  pendingRegions.forEach(function (region) {
+    styleCont += region.location + ' { opacity: 0; }\n'
+  })
 
   var style = document.createElement('style')
   style.innerHTML = styleCont
@@ -24,8 +24,8 @@
     if (reg.size < 20) { reg.size = 20 }
 
     var tri = window.Trianglify({
-      width: 1000,
-      height: 1000,
+      width: window.innerWidth || 1000,
+      height: window.innerHeight || 1000,
       cell_size: reg.size,
       x_colors: reg.colors,
       variance: reg.variance / 100
@@ -39,6 +39,7 @@
 
     el.style.background = "url('data:image/svg+xml;utf8," + svg.outerHTML + "') no-repeat"
     el.style.backgroundSize = 'cover'
+    el.style.backgroundAttachment = 'fixed'
 
     // It takes a non-trivial amount of time to generate the triangles,
     // so we hide the element to prevent a flash.
@@ -46,20 +47,21 @@
   }
 
   function checkNode (node) {
-    if (node.nodeType === 1) {
-      for (var i = 0; i < pendingRegions.length; i++) {
-        if (node.matches(pendingRegions[i].location)) {
-          trianglify(node, pendingRegions[i])
+    if (node.nodeType !== window.Node.ELEMENT_NODE) return false
 
-          pendingRegions.splice(i, 1)
-          i--
+    for (var i = 0; i < pendingRegions.length; i++) {
+      if (node.matches(pendingRegions[i].location)) {
+        trianglify(node, pendingRegions[i])
 
-          return true
-        }
+        pendingRegions.splice(i, 1)
+        i--
+
+        return true
       }
     }
+
     return false
-  };
+  }
 
   function load () {
     for (var i = 0; i < pendingRegions.length; i++) {
@@ -104,8 +106,8 @@
   }
 
   window.INSTALL_SCOPE = {
-    setOptions: function (opts) {
-      options = opts
+    setOptions: function setOptions (nextOptions) {
+      options = nextOptions
 
       pendingRegions = options.regions
 

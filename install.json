@@ -34,6 +34,7 @@
               "description": "What element on the page should be trianglified?",
               "type": "string",
               "format": "selector",
+              "default": "body",
               "order": 1
             },
             "colors": {
